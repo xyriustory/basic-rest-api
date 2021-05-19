@@ -54,6 +54,19 @@ const usersModule = (() => {
         document.getElementById('users-list').insertAdjacentHTML('beforeend', body);
       }
     },
+    fetchFollowingUser: async (followingId, followedId) => {
+      const res = await fetch(BASE_URL + followingId + "following" + followedId);
+      const followedUser = await res.json();
+      const body = `<tr>
+                      <td>${followedUser.id}</td>
+                      <td>${followedUser.name}</td>
+                      <td>${followedUser.profile}</td>
+                      <td>${followedUser.date_of_birth}</td>
+                      <td>${followedUser.created_at}</td>
+                      <td>${followedUser.updated_at}</td>
+                    </tr>`;
+      document.getElementById('users-list').insertAdjacentHTML('beforeend', body);
+    },
     createUser: async () => {
       const name = document.getElementById("name").value;
       const profile = document.getElementById("profile").value;
